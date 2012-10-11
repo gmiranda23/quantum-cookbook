@@ -1,0 +1,46 @@
+[DEFAULT]
+rabbit_password = guest
+rabbit_host = @rabbit_ipaddress
+
+# Quantum plugin provider module
+core_plugin = quantum.plugins.nicira.nicira_nvp_plugin.QuantumPlugin.NvpPluginV2
+#
+# # Paste configuration file
+api_paste_config = api-paste.ini
+
+# The strategy to be used for auth.
+# Supported values are 'keystone'(default), 'noauth'.
+auth_strategy = keystone
+
+# Base MAC address. The first 3 octets will remain unchanged. If the
+# 4h octet is not 00, it will also be used. The others will be
+# randomly generated.
+# 3 octet
+# base_mac = fa:16:3e:00:00:00
+# 4 octet
+# base_mac = fa:16:3e:4f:00:00
+
+# Maximum amount of retries to generate a unique MAC address
+# mac_generation_retries = 16
+
+allow_overlapping_ips = False
+
+# AMQP exchange to connect to if using RabbitMQ or QPID
+control_exchange = quantum
+
+# ============ Notification System Options =====================
+notification_driver = quantum.openstack.common.notifier.rabbit_notifier
+
+default_notification_level = INFO
+
+# default_publisher_id is a part of the notification payload
+# host = myhost.com
+# default_publisher_id = $host
+
+[QUOTAS]
+default_quota = -1
+quota_items = network,subnet,port
+quota_network = 10
+quota_subnet = 10
+quota_port = 50
+
