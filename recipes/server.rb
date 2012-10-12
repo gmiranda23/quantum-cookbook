@@ -19,8 +19,8 @@ template "/etc/quantum/quantum.conf" do
   variables(
             "rabbit_ipaddress" => rabbit_ip
             )
+end
 
 service "quantum-server" do
      action :restart
 end
-

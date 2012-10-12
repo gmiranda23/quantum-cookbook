@@ -13,18 +13,24 @@ case node["openstack"]["quantum"]["plugin"]
 when "nicira"
   package "quantum-plugin-nicira" do
     action :install
+  end
 when "linuxbridge"
   package "quantum-plugin-linuxbridge-agent" do
     action :install
+  end
 when "cisco"
   package "quantum-plugin" do 
     action :install
+  end
 when "openvswitch"
   package "quantum-plugin-openvswitch" do
     action :install
+  end
 when "ryu"
   package "quantum-plugin-ryu" do
     action :install
+  end
+end
 
 template "/etc/quantum/plugins.ini" do
   source "plugins.ini.erb"
@@ -34,6 +40,7 @@ template "/etc/quantum/plugins.ini" do
   variables(
             "plugin_provider" => provider
             )
+end
 
 service "quantum-server" do
      action :restart
