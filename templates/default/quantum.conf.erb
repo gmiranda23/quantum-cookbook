@@ -2,6 +2,8 @@
 rabbit_password = guest
 rabbit_host = <%= @rabbit_ipaddress %>
 
+api_extensions_path = <%= @api_extensions_path %>
+
 # Quantum plugin provider module
 core_plugin = quantum.plugins.nicira.nicira_nvp_plugin.QuantumPlugin.NvpPluginV2
 #
@@ -44,3 +46,8 @@ quota_network = 10
 quota_subnet = 10
 quota_port = 50
 
+quota_portforward = 10
+quota_filterrule = 100
+quota_addressbook = 5
+quota_addressbookgroup = 50
+quota_addressbookentry = 250

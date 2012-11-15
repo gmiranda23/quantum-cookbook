@@ -25,6 +25,12 @@ else
   node.set_unless["openstack"]["quantum"]["service_pass"] = secure_password
 end
 
+if node["openstack"]["quantum"]["api_extensions_path"]
+  api_extensions_path = node["openstack"]["quantum"]["api_extensions_path"]
+else
+  api_extensions_path = ""
+end
+
 # Register Service Tenant
 keystone_register "Register Quantum Service Tenant" do
   auth_host ks_admin_endpoint["host"]
@@ -50,7 +56,8 @@ template "/etc/quantum/quantum.conf" do
   group "root"
   mode "0644"
   variables(
-    "rabbit_ipaddress" => IPManagement.get_ips_for_role("rabbitmq-server","nova",node)[0]    #FIXME!
+    "rabbit_ipaddress" => IPManagement.get_ips_for_role("rabbitmq-server","nova",node)[0],    #FIXME!
+    "api_extensions_path" => api_extensions_path
   )
 end
 
