@@ -1,12 +1,12 @@
 [DEFAULT]
 rabbit_password = guest
-rabbit_host = @rabbit_ipaddress
+rabbit_host = <%= @rabbit_ipaddress %>
 
 # Quantum plugin provider module
 core_plugin = quantum.plugins.nicira.nicira_nvp_plugin.QuantumPlugin.NvpPluginV2
 #
 # # Paste configuration file
-api_paste_config = api-paste.ini
+api_paste_config = /etc/quantum/api-paste.ini
 
 # The strategy to be used for auth.
 # Supported values are 'keystone'(default), 'noauth'.
@@ -23,7 +23,7 @@ auth_strategy = keystone
 # Maximum amount of retries to generate a unique MAC address
 # mac_generation_retries = 16
 
-allow_overlapping_ips = False
+allow_overlapping_ips = True
 
 # AMQP exchange to connect to if using RabbitMQ or QPID
 control_exchange = quantum
