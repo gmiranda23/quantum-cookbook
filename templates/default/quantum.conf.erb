@@ -5,7 +5,7 @@ rabbit_host = <%= @rabbit_ipaddress %>
 api_extensions_path = <%= @api_extensions_path %>
 
 # Quantum plugin provider module
-core_plugin = quantum.plugins.nicira.nicira_nvp_plugin.QuantumPlugin.NvpPluginV2
+core_plugin = akanda.quantum.plugins.nvp_quantum_plugin.NVPQuantumPlugin 
 #
 # # Paste configuration file
 api_paste_config = /etc/quantum/api-paste.ini
