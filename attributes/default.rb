@@ -29,3 +29,8 @@ default["openstack"]["quantum"]["syslog"]["use"] = false
 default["openstack"]["quantum"]["syslog"]["facility"] = "LOG_LOCAL2"
 default["openstack"]["quantum"]["syslog"]["config_facility"] = "local2"
 
+#NVP plugin settings
+# This is uuid of the default NVP Transport zone that will be used for
+# creating tunneled isolated "Quantum" networks.  It needs to be created in
+# NVP before starting Quantum with the nvp plugin.
+default["quantum"]["plugin"]["nvp"]["tz_uuid"] = "b0eeec88-5f36-4c23-a20e-62fe69d4c16b"
