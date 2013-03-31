@@ -46,10 +46,8 @@ keystone_register "Register Quantum Service Tenant" do
   action :create_user
 end
 
-%w{ quantum-server python-akanda-quantum }.each do |pkg| 
-  package pkg do
-    action :install
-  end
+package quantum-server do
+  action :install
 end
 
 template "/etc/quantum/quantum.conf" do
