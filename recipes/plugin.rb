@@ -65,6 +65,13 @@ create_db_and_user("mysql",
                     node["openstack"]["quantum"]["db"]["username"],
                     node["openstack"]["quantum"]["db"]["password"])
 
+directory "/etc/quantum/plugins/nicira" do
+  recursive true
+  owner "root"
+  group "root"
+  mode "0755"
+end
+
 template "/etc/quantum/plugins/nicira/nvp.ini" do
   source "plugins/nicira/nvp.ini.erb"
   owner "root"
