@@ -2,8 +2,8 @@
 # Cookbook Name:: Quantum 
 # Recipe:: plugin 
 #
-# Copyright 2012, DreamHost
 # Copyright 2013, Opscode, Inc.
+# Copyright 2012, DreamHost
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,33 +18,21 @@
 # limitations under the License.
 #
 
-#TODO Figure out the providers for each plugin
-
 case node["openstack"]["quantum"]["plugin"]
 when "nicira"
-  package "quantum-plugin-nicira" do
-    action :install
-  end
+  package "quantum-plugin-nicira"
   provider = "quantum.plugins.nicira.nicira_nvp_plugin.QuantumPlugin.NvpPluginV2"
 when "linuxbridge"
-  package "quantum-plugin-linuxbridge-agent" do
-    action :install
-  end
-  provider = "quantum.plugins.sample.SamplePlugin.FakePlugin"
+  package "quantum-plugin-linuxbridge-agent"
+  provider = "quantum.plugins.linuxbridge.lb_quantum_plugin.LinuxBridgePluginV2"
 when "cisco"
-  package "quantum-plugin" do 
-    action :install
-  end
-  provider = "quantum.plugins.sample.SamplePlugin.FakePlugin"
+  package "quantum-plugin"
+  provider = "quantum.plugins.cisco.network_plugin.PluginV2"
 when "openvswitch"
-  package "quantum-plugin-openvswitch" do
-    action :install
-  end
-  provider = "quantum.plugins.sample.SamplePlugin.FakePlugin"
+  package "quantum-plugin-openvswitch"
+  provider = "quantum.plugins.openvswitch.ovs_quantum_plugin.OVSQuantumPlugin"
 when "ryu"
-  package "quantum-plugin-ryu" do
-    action :install
-  end
+  package "quantum-plugin-ryu"
   provider = "quantum.plugins.ryu.ryu_quantum_plugin.RyuQuantumPluginV2"
 end
 
@@ -65,27 +53,38 @@ create_db_and_user("mysql",
                     node["openstack"]["quantum"]["db"]["username"],
                     node["openstack"]["quantum"]["db"]["password"])
 
-directory "/etc/quantum/plugins/nicira" do
-  recursive true
-  owner "root"
-  group "root"
-  mode "0755"
-end
+case node["openstack"]["quantum"]["plugin"]
+when "nicira"
+  directory "/etc/quantum/plugins/nicira" do
+    recursive true
+    owner "root"
+    group "root"
+    mode "0755"
+  end
 
-template "/etc/quantum/plugins/nicira/nvp.ini" do
-  source "plugins/nicira/nvp.ini.erb"
-  owner "root"
-  group "root"
-  mode "0644"
-  variables(
-    "mysql_pass" => node["openstack"]["quantum"]["db"]["password"],
-    "mysql_host" => mysql_info["bind_address"],
-    "mysql_user" => node["openstack"]["quantum"]["db"]["username"],
-    "tz_uuid" => node["quantum"]["plugin"]["nvp"]["tz_uuid"]
-  )
+  template "/etc/quantum/plugins/nicira/nvp.ini" do
+    source "plugins/nicira/nvp.ini.erb"
+    owner "root"
+    group "root"
+    mode "0644"
+    variables(
+      "mysql_pass" => node["openstack"]["quantum"]["db"]["password"],
+      "mysql_host" => mysql_info["bind_address"],
+      "mysql_user" => node["openstack"]["quantum"]["db"]["username"],
+      "tz_uuid" => node["quantum"]["plugin"]["nvp"]["tz_uuid"]
+    )
+  end
+#TODO add logic for setting up additional plugins
+when "linuxbridge"
+  #
+when "cisco"
+  #
+when "openvswitch"
+  #
+when "ryu"
+  #
 end
 
 service "quantum-server" do
      action :restart
 end
-

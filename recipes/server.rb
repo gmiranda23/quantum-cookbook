@@ -2,8 +2,8 @@
 # Cookbook Name:: Quantum 
 # Recipe:: server
 #
-# Copyright 2012, DreamHost
 # Copyright 2013, Opscode, Inc.
+# Copyright 2012, DreamHost
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@ keystone_register "Register Quantum Service Tenant" do
   action :create_user
 end
 
-package "quantum-server" 
+package "quantum-server"
 
 template "/etc/quantum/quantum.conf" do
   source "quantum.conf.erb"
@@ -68,7 +68,7 @@ template "/etc/quantum/quantum.conf" do
   group "root"
   mode "0644"
   variables(
-    "rabbit_ipaddress" => IPManagement.get_ips_for_role("rabbitmq-server","nova",node)[0],    #FIXME!
+    "rabbit_ipaddress" => IPManagement.get_ips_for_role("rabbitmq-server","nova",node)[0],
     "api_extensions_path" => api_extensions_path
   )
 end
