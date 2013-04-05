@@ -5,6 +5,7 @@ default["developer_mode"] = false  # we want secure passwords by default
 ########################################################################
 
 default["openstack"]["quantum"]["folsom"]["version"] = "2012.2+git201209242000~precise-0ubuntu1"
+default["openstack"]["quantum"]["plugin"] = "nicira"
 
 default["openstack"]["quantum"]["services"]["api"]["scheme"] = "http"
 default["openstack"]["quantum"]["services"]["api"]["network"] = "public"

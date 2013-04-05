@@ -62,6 +62,19 @@ end
 
 package "quantum-server"
 
+case node["openstack"]["quantum"]["plugin"]
+when "nicira"
+  provider = "quantum.plugins.nicira.nicira_nvp_plugin.QuantumPlugin.NvpPluginV2"
+when "linuxbridge"
+  provider = "quantum.plugins.linuxbridge.lb_quantum_plugin.LinuxBridgePluginV2"
+when "cisco"
+  provider = "quantum.plugins.cisco.network_plugin.PluginV2"
+when "openvswitch"
+  provider = "quantum.plugins.openvswitch.ovs_quantum_plugin.OVSQuantumPlugin"
+when "ryu"
+  provider = "quantum.plugins.ryu.ryu_quantum_plugin.RyuQuantumPluginV2"
+end
+
 template "/etc/quantum/quantum.conf" do
   source "quantum.conf.erb"
   owner "root"
@@ -69,7 +82,8 @@ template "/etc/quantum/quantum.conf" do
   mode "0644"
   variables(
     "rabbit_ipaddress" => IPManagement.get_ips_for_role("rabbitmq-server","nova",node)[0],
-    "api_extensions_path" => api_extensions_path
+    "api_extensions_path" => api_extensions_path,
+    "provider" => provider
   )
 end
 
