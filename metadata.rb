@@ -1,3 +1,4 @@
+name             "quantum"
 maintainer       "Opscode, Inc."
 maintainer_email "gmiranda@opscode.com"
 license          "Apache 2.0"

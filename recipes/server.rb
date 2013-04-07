@@ -19,7 +19,7 @@
 #
 #
 
-rabbit_info = get_settings_by_role("rabbitmq-server", "rabbitmq") # FIXME: access
+rabbit_info = get_settings_by_role("rabbitmq-server", "rabbitmq")
 keystone = get_settings_by_role("keystone", "keystone")
 ks_admin_endpoint = get_access_endpoint("keystone", "keystone", "admin-api")
 ks_service_endpoint = get_access_endpoint("keystone", "keystone", "service-api")
@@ -104,7 +104,7 @@ template "/etc/quantum/api-paste.ini" do
     "service_user" => node["openstack"]["quantum"]["service_user"],
     "service_pass" => node["openstack"]["quantum"]["service_pass"]
   )
- notifies :restart, resources(:service => "nova-api-os-compute"), :delayed
+ notifies :restart, "service[nova-api-os-compute]"
 end
 
 # Register Network Service
