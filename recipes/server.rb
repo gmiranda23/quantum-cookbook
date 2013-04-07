@@ -62,6 +62,11 @@ end
 
 package "quantum-server"
 
+service "quantum-server" do
+     action [:enable, :start]
+     supports :restart => true
+end
+
 case node["openstack"]["quantum"]["plugin"]
 when "nicira"
   provider = "quantum.plugins.nicira.nicira_nvp_plugin.QuantumPlugin.NvpPluginV2"
@@ -133,8 +138,5 @@ keystone_register "Register Network Endpoint" do
   endpoint_internalurl api_endpoint["uri"]
   endpoint_publicurl api_endpoint["uri"]
   action :create_endpoint
-end
-
-service "quantum-server" do
-     action :restart
+  notifies :restart, "service[quantum-server]", :immediately
 end
