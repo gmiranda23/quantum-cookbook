@@ -10,6 +10,6 @@ version          "0.1.0"
   supports os
 end
 
-%w{ osops-utils }.each do |dep|
+%w{ database, mysql, glance, osops-utils }.each do |dep|
   depends dep
 end
