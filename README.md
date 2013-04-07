@@ -50,21 +50,17 @@ Attributes
 ==========
 * `developer_mode` - sets well known openstack passwords
 
-* `openstack['quantum']['services']['api']['scheme']` - sets API
-  versioning scheme
+* `openstack['quantum']['services']['api']['scheme']` - sets API versioning scheme
 * `openstack['quantum']['services']['api']['network']` - sets API network
-* `openstack['quantum']['services']['api']['port']` - sets API
-  server port
-* `openstack['quantum']['services']['api']['path']` - sets API
-  version path
+* `openstack['quantum']['services']['api']['port']` - sets API server port
+* `openstack['quantum']['services']['api']['path']` - sets API version path
 
-* `openstack['quantum']['service_tenant_name']` - sets Keystone registry service tenant name
-* `openstack['quantum']['service_user']` - sets Keystone registry user name
-* `openstack['quantum']['service_role']` - sets Keystone registry service role name
+* `quantum['service_tenant_name']` - sets Keystone registry service tenant name for quantum
+* `quantum['service_user']` - sets Keystone registry user name for quantum
+* `quantum['service_role']` - sets Keystone registry service role name for quantum
 
 * `openstack['quantum']['syslog']['use']` - controls use of syslog for quantum
 * `openstack['quantum']['syslog']['facility']` - controls syslog facility setting
-
 * `openstack['quantum']['plugin']` - sets desired plugin for use with quantum (only supports "nicira" at present)
 
 * `openstack['quantum']['plugin']['nvp']['tz_uuid']` - sets uuid of transport zone for use with nicira nvp plugin

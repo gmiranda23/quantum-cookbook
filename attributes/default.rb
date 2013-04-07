@@ -5,6 +5,11 @@ default["openstack"]["quantum"]["services"]["api"]["network"] = "public"
 default["openstack"]["quantum"]["services"]["api"]["port"] = 9696
 default["openstack"]["quantum"]["services"]["api"]["path"] = "/v2.0"
 
+default["quantum"]["services"]["api"]["scheme"] = "http"
+default["quantum"]["services"]["api"]["network"] = "public"
+default["quantum"]["services"]["api"]["port"] = 9696
+default["quantum"]["services"]["api"]["path"] = "/v2.0"
+
 default["openstack"]["quantum"]["db"]["name"] = "quantum"
 default["openstack"]["quantum"]["db"]["username"] = "quantum"
 
